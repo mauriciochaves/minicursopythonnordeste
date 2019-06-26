@@ -1,0 +1,4 @@
+Appium-Python-Client
+behave
+PyHamcrest
+selenium
