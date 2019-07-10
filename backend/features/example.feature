@@ -1,6 +1,7 @@
 # language: pt
 Funcionalidade: Listar um usuário
 
+ @wip 
  Esquema do Cenário: Listar um usuário com sucesso
    Dado Eu efetuo requisição <metodo> para <endpoint> com identificação usuário <id>
    Então Eu verifico o resultado da requisição
@@ -12,5 +13,5 @@ Funcionalidade: Listar um usuário
 
    Examples:
     | metodo | endpoint | codigo_retorno | id | primeiro_nome | ultimo_nome | avatar                                                             |
-    | GET    | /users/2 | 200            | 2  | Janet         | Weaver      | https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg |
+    | GET    | users/   | 200            | 2  | Janet         | Weaver      | https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg |
     
