@@ -8,27 +8,17 @@ import backend.features.common.request_generic as rq
 @given(u'Eu efetuo requisição "{metodo}" para "{endpoint}" com identificação usuário "{id}"')
 def get_url_method_data(context, metodo, endpoint, id):
     context.endpont_final = context.base_url + endpoint + id
-    context.response = rq.send_request_generic(context.endpont_final)
-    print(context.response)
+    headers = {'Content-Type' : 'application/json'}
+    context.response = rq.send_request_generic(context.endpont_final, metodo, headers)
+    context.status_code = context.response.status_code
+    context.result = context.response.json()
+     
+    #print(result["data"]["id"])
 
 
-
-
-# @given('I submit POST request on url "(?P<url>.+)" using: "(?P<email>.+)" value to "email" field, "(?P<password>.+)" value to "password" field')
-# def step_impl(context, url, email, password):
-#     payload = {'email': email, 'password': password}
-#     context.response = requests.post(BASE_URL + url, json=payload)
-
-
-# @when("I check result response")
-# def step_impl(context):
-#     context.status_code = context.response.status_code
-#     context.data = context.response.json()
-
-
-# @then("I check status code (?P<status_code>.+)")
-# def step_impl(context, status_code):
-#     assert (int(context.status_code) == int(status_code))
+@then(u'Eu verifico o codigo de retorno "{codigo_retorno}"')
+def step_impl(context, codigo_retorno):
+    assert (int(context.status_code) == int(codigo_retorno))
 
 
 # @step('I check the field "(?P<field>.+)" containing the not empty value')
