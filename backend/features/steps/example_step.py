@@ -1,7 +1,7 @@
 import json
 import requests
 from behave import given, when, then, step
-from behave import *
+from hamcrest import assert_that, is_
 import backend.features.common.request_generic as rq
 
 
@@ -13,55 +13,41 @@ def get_url_method_data(context, metodo, endpoint, id):
     context.status_code = context.response.status_code
     context.result = context.response.json()
      
-    #print(result["data"]["id"])
-
-
+    
 @then(u'Eu verifico o codigo de retorno "{codigo_retorno}"')
 def step_impl(context, codigo_retorno):
-    assert (int(context.status_code) == int(codigo_retorno))
+    assert_that(int(context.status_code), is_(int(codigo_retorno)))
 
+@then(u'Eu verifico o campo primeiro nome "{primeiro_nome}"')
+def step_impl(context, primeiro_nome):
+    assert_that(context.result["data"]["first_name"], is_(primeiro_nome))
 
-# @step('I check the field "(?P<field>.+)" containing the not empty value')
-# def step_impl(context, field):
-#     assert (field in context.data)
-#     assert (context.data[field] != "")
+@then(u'Eu verifico o campo ultimo nome "{ultimo_nome}"')
+def step_impl(context, ultimo_nome):
+    assert_that(context.result["data"]["last_name"], is_(ultimo_nome))
 
+@then(u'Eu verifico o campo avatar "{avatar}"')
+def step_impl(context, avatar):
+    assert_that(context.result["data"]["avatar"], is_(avatar))     
 
-# @given('I submit POST request on url "(?P<url>.+)" using: "(?P<email>.+)" value to "email" field')
-# def step_impl(context, url, email):
-#     payload = {'email': email}
-#     context.response = requests.post(BASE_URL + url, json=payload)
+@then(u'Eu verifico o campo email "{email}"')
+def step_impl(context, email):
+    assert_that(context.result["data"]["email"], is_(email))
 
+@given(u'Eu efetuo solicitação de dados do usuario')
+def get_url_method_data_context_table(context):
+    for row in context.table:
+        context.endpont_final = context.base_url + row["endpoint"] + row["id"]
+        headers = {'Content-Type' : 'application/json'}
+        context.response = rq.send_request_generic(context.endpont_final, row["metodo"], headers)
+        context.status_code = context.response.status_code
+        context.result = context.response.json()     
 
-# @step('I check the field "(?P<field>.+)" containing the value "(?P<field_value>.+)"')
-# def step_impl(context, field, field_value):
-#     assert (field in context.data)
-#     assert (context.data[field] == field_value)
-
-
-# @given('I submit POST request on url "(?P<url>.+)" using: "(?P<name>.+)" value to "name" field, "(?P<job>.+)" value to "job" field')
-# def step_impl(context, url, name, job):
-#     payload = {'name': name, 'job': job}
-#     context.response = requests.post(BASE_URL + url, json=payload)
-
-
-# @step('I check value of the parameter "(?P<param>.+)" from results response')
-# def step_impl(context, param):
-#     context.param = context.response.json()[param]
-
-
-# @when('I submit PUT request on url "(?P<url>.+)" using: "(?P<name>.+)" value to "name" field, "(?P<new_job>.+)" value to "job" field')
-# def step_impl(context, url, name, new_job):
-#     payload = {'name': name, 'job': new_job}
-#     user_id = context.param
-#     context.response = requests.put(BASE_URL + url + user_id, json=payload)
-
-
-# @given('I submit GET request on url "(?P<url>.+)"')
-# def step_impl(context, url):
-#     context.response = requests.get(BASE_URL + url)
-
-
-# @step('I check the field "(?P<field>.+)" containing the value "(?P<field_value>.+)" in "(?P<field_root>.+)" field')
-# def step_impl(context, field, field_value, root_field):
-#     assert (str(context.data[root_field][field]) == str(field_value))
+@then(u'Eu verifico seu retorno da solicitação')
+def step_impl(context):
+    for row in context.table:
+        assert_that(int(context.status_code), is_(int(row["codigo_retorno"])))
+        assert_that(context.result["data"]["first_name"], is_(row["primeiro_nome"]))
+        assert_that(context.result["data"]["last_name"], is_(row["ultimo_nome"]))
+        assert_that(context.result["data"]["avatar"], is_(row["avatar"]))
+        assert_that(context.result["data"]["email"], is_(row["email"]))
