@@ -22,7 +22,7 @@ Examples:
   | GET    | users/   | 200            | 2  | Janet         | janet.weaver@reqres.in | Weaver      | https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg |
     
 
-@wip
+
 Scenario: Listar um usuário com sucesso 3
   Given Eu efetuo solicitação de dados do usuario
      | metodo | endpoint | id |
