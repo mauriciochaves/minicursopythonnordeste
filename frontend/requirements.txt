@@ -1,3 +1,5 @@
-selenium	
-PyHamcrest
+Appium-Python-Client
 behave
+PyHamcrest
+selenium
+six
