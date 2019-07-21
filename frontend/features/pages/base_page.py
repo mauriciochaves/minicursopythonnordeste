@@ -52,48 +52,32 @@ class BasePage:
         return WebDriverWait(self.driver, time)
 
     def type_with_javascript_by_class_name(self, class_name, index, text):
-        self.driver.execute_script(
-            'document.getElementsByClassName("' +
-            class_name +
-            '")[' +
-            index +
-            '].innerHTML = "' +
-            text +
-            '";')
+        self.driver.execute_script('document.getElementsByClassName("' + class_name + '")[' + index + '].innerHTML = "' + text + '";')
 
     def type_with_javascript(self, id, index, text):
-        self.driver.execute_script(
-            'document.getElementsByID("' +
-            id +
-            '")[' +
-            index +
-            '].innerHTML = "' +
-            text +
-            '";')
+        self.driver.execute_script('document.getElementsByID("' + id + '")[' + index + '].innerHTML = "' + text + '";')
 
     def select_in_combo_visible_text(self, locator, value):
-        Select(self.wait_for(EC.visibility_of_element_visible(locator))
-               ).select_by_value(value)
+        Select(self.wait_for(EC.visibility_of_element_visible(locator))).select_by_value(value)
 
     def select_in_combo_by_index(self, locator, value):
         element = Select(self.driver.find_element_by_id(locator[1]))
         element.select_by_index(value)
 
-    def select_in_combo_by_value2(self, locator, value):
+    def select_in_combo_by_value2(self,locator, value):
         element = Select(self.driver.find_element_by_id(locator[1]))
         element.select_by_value(value)
 
-    def select_in_combo_by_text(self, locator, value):
+    def select_in_combo_by_text(self,locator, value):
         element = Select(self.driver.find_element_by_id(locator[1]))
         element.select_by_visible_text(value)
 
     def select_in_combo_visible_by_index(self, locator, value):
-        Select(self.wait_for(EC.visibility_of_element_located(locator))
-               ).select_by_index(value)
+        Select(self.wait_for(EC.visibility_of_element_located(locator))).select_by_index(value)
 
     def select_in_combo_by_xpath(self, locator, content):
         self.click(locator)
-        path = "//div[@value=" + "'" + content + "'" + "]"
+        path = "//div[@value="+"'"+content+"'"+"]"
         item = self.driver.find_elements_by_xpath(path)
         item[0].click()
 
@@ -102,7 +86,7 @@ class BasePage:
         element = self.driver.find_elements_by_id(z)
         print(element.text())
         return element
-
+    
     def find_by_xpath(self, locator):
         z = locator[1]
         element = self.driver.find_elements_by_xpath(z)
@@ -114,8 +98,7 @@ class BasePage:
         return element
 
     def return_elements_on_cell(self, expected):
-        baseTable = self.driver.find_elements_by_xpath(
-            '//*[@class="item"]/div')
+        baseTable = self.driver.find_elements_by_xpath('//*[@class="item"]/div')
         for item in baseTable:
             time.sleep(8)
             if item.text == expected:
@@ -142,3 +125,4 @@ class BasePage:
 
     def switch_tab(self, index):
         self.driver.switch_to_window(self.driver.window_handles[index])
+

@@ -5,12 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Windows - pyNE",
+            "name": "Mac - Apple Definition",
             "type": "python",
             "request": "launch",
             "console": "integratedTerminal",
-            "cwd": "endereco do projeto",
-            "args": ["-m", "behave", "--no-capture", "--no-skipped", "--tags=@run"]
+            "cwd": "Users/renato/Downloads/wiktionary-python-automation-master/",
+            "args": ["-m", "behave", "--no-capture", "--no-skipped", "--tags=@runSearch"]
+        },
+        {
+            "name": "Win - Apple Definition",
+            "type": "python",
+            "request": "launch",
+            "console": "integratedTerminal",
+            "cwd": "C:/Users/renat/Desktop/adidasFront",
+            "args": ["-m", "behave", "--no-capture", "--no-skipped", "--tags=@runSearch"]
         }
     ]
 }
