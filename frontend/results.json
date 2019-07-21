@@ -1,0 +1,70 @@
+[
+{
+  "elements": [
+    {
+      "keyword": "Scenario Outline", 
+      "location": "features/definition.feature:10", 
+      "name": "Search existing definition of apple word -- @1.1 searchbase", 
+      "status": "passed", 
+      "steps": [
+        {
+          "keyword": "Given", 
+          "location": "features/definition.feature:4", 
+          "match": {
+            "arguments": [], 
+            "location": "features/steps/home_step.py:9"
+          }, 
+          "name": "I open: https://en.wiktionary.org/prepare by the first time", 
+          "result": {
+            "duration": 1.7601308822631836, 
+            "status": "passed"
+          }, 
+          "step_type": "given"
+        }, 
+        {
+          "keyword": "When", 
+          "location": "features/definition.feature:5", 
+          "match": {
+            "arguments": [], 
+            "location": "features/steps/home_step.py:14"
+          }, 
+          "name": "I am on homepage", 
+          "result": {
+            "duration": 0.11256194114685059, 
+            "status": "passed"
+          }, 
+          "step_type": "when"
+        }, 
+        {
+          "keyword": "Then", 
+          "location": "features/definition.feature:6", 
+          "match": {
+            "arguments": [
+              {
+                "name": "searchTxt", 
+                "value": "apple"
+              }
+            ], 
+            "location": "features/steps/home_step.py:26"
+          }, 
+          "name": "I look up the definition of the word apple", 
+          "result": {
+            "duration": 0.6290278434753418, 
+            "status": "passed"
+          }, 
+          "step_type": "then"
+        }
+      ], 
+      "tags": [], 
+      "type": "scenario"
+    }
+  ], 
+  "keyword": "Feature", 
+  "location": "features/definition.feature:2", 
+  "name": "Python Nordeste Search Event", 
+  "status": "passed", 
+  "tags": [
+    "runSearch"
+  ]
+}
+]

@@ -1,5 +1,14 @@
 Appium-Python-Client
+autopep8
 behave
+allure-behave
+allure-robotframework
+allure-python-commons
+enum34
+parse
+parse-type
+pycodestyle
 PyHamcrest
 selenium
 six
+mkdocs
